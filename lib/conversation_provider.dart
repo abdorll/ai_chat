@@ -36,7 +36,12 @@ class ConversationProvider extends ChangeNotifier {
         'content': message.base64ImageString == null
             ? message.content
             : [
-                {"type": "text", "text": message.content},
+                {
+                  "type": "text",
+                  "text": message.content.isEmpty
+                      ? "You are to Extract the information about this skin and write a structure analysis of it in the format of an array of values of catagory, colour, shape, size, diagnosis and nothing else. All output must be in valid JSON and nothing else, just a pure JSON file. Don’t add explanation beyond the JSON and only give the most probable answer only 1 diagnosis. Obey this strict structure of category: Mole, color: , shape: , size: , diagnosis:"
+                      : message.content
+                },
                 {
                   "type": "image_url",
                   "image_url": {
